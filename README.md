@@ -39,10 +39,11 @@ A Python-based video surveillance analysis tool that uses Google's ADK (Agent De
    pip install -r requirements.txt
    ```
 
-5. **Set up your Google API key**
-  
+5. **Set up your Google API key after creating .env file**
+   ```
    GOOGLE_GENAI_USE_VERTEXAI=FALSE
    GOOGLE_API_KEY= Your_API_KEY
+   ```
 
 ## Usage
 
