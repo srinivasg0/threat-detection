@@ -6,10 +6,10 @@ Main entry point for the video surveillance application
 import sys
 import os
 
-# Add app directory to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'app'))
+# Add src directory to Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
-from app.run_batch import process_videos
+from src.run_batch import process_videos
 
 if __name__ == "__main__":
     print("Starting Video Surveillance Analysis...")

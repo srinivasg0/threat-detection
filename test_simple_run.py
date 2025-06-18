@@ -1,10 +1,15 @@
+#!/usr/bin/env python3
+"""
+Simple test script to verify the video surveillance setup
+"""
+
 import json
 import os
 import pathlib
 import base64
 import cv2
 import google.generativeai as genai
-from app.settings import GOOGLE_API_KEY
+from src.settings import GOOGLE_API_KEY
 
 # Configure Gemini
 genai.configure(api_key=GOOGLE_API_KEY)
@@ -106,11 +111,11 @@ def main():
         print("\n" + "="*50)
     
     # Save results
-    os.makedirs("app/results", exist_ok=True)
-    with open("app/results/threat_analysis.json", "w") as f:
+    os.makedirs("src/results", exist_ok=True)
+    with open("src/results/threat_analysis.json", "w") as f:
         json.dump(results, f, indent=2)
     
-    print(f"\n✅ Results saved to: app/results/threat_analysis.json")
+    print(f"\n✅ Results saved to: src/results/threat_analysis.json")
 
 if __name__ == "__main__":
     main()

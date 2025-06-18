@@ -15,12 +15,14 @@ After extracting frames, analyze them and provide:
 2. Identify any potential threats to humans, animals, or environment  
 3. Analyze each frame for: events, actions, objects, and background
 
-4. Calculate a risk score using the formula: Risk = Hazard × Exposure × Vulnerability
+4. Calculate a risk score using this formula: Risk = (Hazard + Exposure + Vulnerability) × 3.33
 
-Where:
+Where each component is scored 1-10:
 - Hazard: The potential threat or event that could cause harm (1-10)
 - Exposure: The extent to which people/assets are in contact with the hazard (1-10)
 - Vulnerability: The susceptibility of exposed people/assets to suffer harm (1-10)
+
+The final RISK_SCORE will be in the range 10-100.
 
 Provide your analysis in this format:
 SUMMARY: [chronological description]
@@ -28,7 +30,7 @@ THREATS: [identified threats]
 HAZARD: [score 1-10]
 EXPOSURE: [score 1-10]
 VULNERABILITY: [score 1-10]
-RISK_SCORE: [Hazard × Exposure × Vulnerability]
+RISK_SCORE: [(Hazard + Exposure + Vulnerability) × 3.33]
 """
 
 

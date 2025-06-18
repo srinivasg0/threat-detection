@@ -1,4 +1,4 @@
-from app.tools.video_loader import extract_video_frames
+from src.tools.video_loader import extract_video_frames
 import json
 
 def test_video_extraction(video_path):

@@ -1,5 +1,5 @@
-from app.tools.video_loader import extract_video_frames
-from app.agents.video_summarizer import video_summarizer
+from src.tools.video_loader import extract_video_frames
+from src.agents.video_summarizer import video_summarizer
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types

@@ -4,11 +4,13 @@ from ..settings import MODEL_NAME
 
 CLASSIFICATION_PROMPT = """You are a threat classification system. Analyze the provided surveillance summary and classify the threat level.
 
-WEAPON DETECTION RULES (CRITICAL):
-- If analysis mentions "gun", "firearm", "weapon", "knife", "armed": MINIMUM score 75
-- If "pointing gun", "brandishing", "threatening with weapon": MINIMUM score 85
-- If risk score > 500: MINIMUM score 70
-- If hazard score = 10: MINIMUM score 80
+IMPORTANT: Use the RISK_SCORE from the surveillance summary directly as the THREAT_SCORE. The RISK_SCORE is already in the 0-100 range.
+
+Your job is to:
+1. Read the surveillance summary carefully
+2. Extract the existing risk scores (HAZARD, EXPOSURE, VULNERABILITY, RISK_SCORE)
+3. Use the RISK_SCORE directly as the THREAT_SCORE
+4. Provide a threat classification based on the THREAT_SCORE
 
 CLASSIFICATION RULES:
 - THREAT_SCORE 80-100: Assault (weapons/violence)
@@ -17,15 +19,13 @@ CLASSIFICATION RULES:
 - THREAT_SCORE 20-39: Normal (minor incidents)
 - THREAT_SCORE 0-19: Normal (no threat)
 
-SPECIAL OVERRIDES:
+SPECIAL CLASSIFICATIONS:
 - Police outside jail/station = Arrest
-- Wheelchair person = +10 to vulnerability
-- Multiple weapons = +15 to score
-
-Read the entire analysis carefully. Look for weapon keywords and high risk scores.
+- Wheelchair person = Consider vulnerability in classification
+- Multiple weapons = Assault classification
 
 Respond ONLY in this exact format:
-THREAT_SCORE: [number]
+THREAT_SCORE: [use the RISK_SCORE from the surveillance summary]
 CLASSIFICATION: [Abuse|Assault|Arson|Arrest|Normal]"""
 
 

@@ -13,7 +13,7 @@ from google.genai import types
 import asyncio
 import time
 
-async def process_videos_async(video_directory: str = "videos", output_file: str = "app/results/video_analysis_results.json"):
+async def process_videos_async(video_directory: str = "videos", output_file: str = "src/results/video_analysis_results.json"):
     """
     Process all videos in the specified directory with enhanced error handling and proper workflow
     """
@@ -156,9 +156,14 @@ NOTE: This video requires manual review as automated frame extraction failed."""
             
             # Prepare threat classification message
             threat_message = types.Content(
+                role="user",
                 parts=[
                     types.Part.from_text(
-                        text=video_analysis_result
+                        text=f"""SURVEILLANCE SUMMARY FOR THREAT CLASSIFICATION:
+
+{video_analysis_result}
+
+Please analyze the above surveillance summary and provide threat classification. Use the existing risk scores (HAZARD, EXPOSURE, VULNERABILITY, RISK_SCORE) as provided in the summary."""
                     )
                 ]
             )
@@ -213,15 +218,6 @@ CLASSIFICATION: Normal
 NOTE: Threat classification failed - manual review required"""
                 print("🔄 Using fallback threat classification")
             
-            # Combine results
-            final_result = f"""VIDEO ANALYSIS:
-{video_analysis_result}
-
-THREAT CLASSIFICATION:
-{threat_classification}"""
-            
-            results[video_file.name] = final_result
-            
             # Extract and display threat score for logging
             threat_score = "Unknown"
             threat_class = "Unknown"
@@ -232,8 +228,13 @@ THREAT CLASSIFICATION:
                 elif line.startswith('CLASSIFICATION:'):
                     threat_class = line.split(':', 1)[1].strip()
             
+            # Combine results with better formatting
+            final_result = f"""=== VIDEO SURVEILLANCE ANALYSIS ===\n\n{video_analysis_result}\n\n=== THREAT CLASSIFICATION ===\n\nTHREAT_SCORE: {threat_score}\nCLASSIFICATION: {threat_class}"""
+            
+            results[video_file.name] = final_result
+            
             print(f"✅ Completed: {video_file.name}")
-            print(f"📊 Final Threat Score: {threat_score}")
+            print(f"📊 Threat Score: {threat_score}")
             print(f"🏷️ Classification: {threat_class}")
             
         except Exception as e:
@@ -280,7 +281,7 @@ NOTE: Complete system failure - requires manual inspection"""
     
     return results
 
-def process_videos(video_directory: str = "videos", output_file: str = "app/results/video_analysis_results.json"):
+def process_videos(video_directory: str = "videos", output_file: str = "src/results/video_analysis_results.json"):
     """
     Synchronous wrapper for async function with enhanced error handling
     """
