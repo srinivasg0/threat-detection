@@ -15,22 +15,38 @@ After extracting frames, analyze them and provide:
 2. Identify any potential threats to humans, animals, or environment  
 3. Analyze each frame for: events, actions, objects, and background
 
-4. Calculate a risk score using this formula: Risk = (Hazard + Exposure + Vulnerability) × 3.33
+4. Calculate a risk score using the formula: Risk = Hazard × Exposure × Vulnerability
 
-Where each component is scored 1-10:
-- Hazard: The potential threat or event that could cause harm (1-10)
-- Exposure: The extent to which people/assets are in contact with the hazard (1-10)
-- Vulnerability: The susceptibility of exposed people/assets to suffer harm (1-10)
+SCORING GUIDELINES (1-10 scale):
 
-The final RISK_SCORE will be in the range 10-100.
+HAZARD (Potential for harm):
+- 1-2: No threat, normal activity
+- 3-4: Minor disturbance, verbal conflict
+- 5-6: Physical altercation, property damage
+- 7-8: Armed threat, serious violence
+- 9-10: Life-threatening, weapons, extreme violence
+
+EXPOSURE (Number of people at risk):
+- 1-2: 1-2 people exposed
+- 3-4: 3-5 people exposed
+- 5-6: 6-10 people exposed
+- 7-8: 11-20 people exposed
+- 9-10: 20+ people exposed
+
+VULNERABILITY (Defenselessness):
+- 1-2: People are alert and can defend themselves
+- 3-4: Some vulnerability, limited defense options
+- 5-6: Moderate vulnerability, people are caught off guard
+- 7-8: High vulnerability, people are defenseless
+- 9-10: Extreme vulnerability, no chance of defense
 
 Provide your analysis in this format:
 SUMMARY: [chronological description]
 THREATS: [identified threats]
-HAZARD: [score 1-10]
-EXPOSURE: [score 1-10]
-VULNERABILITY: [score 1-10]
-RISK_SCORE: [(Hazard + Exposure + Vulnerability) × 3.33]
+HAZARD: [score 1-10 with explanation]
+EXPOSURE: [score 1-10 with explanation]
+VULNERABILITY: [score 1-10 with explanation]
+RISK_SCORE: [Hazard × Exposure × Vulnerability]
 """
 
 

@@ -4,20 +4,20 @@ from ..settings import MODEL_NAME
 
 CLASSIFICATION_PROMPT = """You are a threat classification system. Analyze the provided surveillance summary and classify the threat level.
 
-IMPORTANT: Use the RISK_SCORE from the surveillance summary directly as the THREAT_SCORE. The RISK_SCORE is already in the 0-100 range.
+IMPORTANT: Use the RISK_SCORE from the surveillance summary exactly as provided. Do NOT modify or recalculate it.
 
 Your job is to:
 1. Read the surveillance summary carefully
-2. Extract the existing risk scores (HAZARD, EXPOSURE, VULNERABILITY, RISK_SCORE)
-3. Use the RISK_SCORE directly as the THREAT_SCORE
-4. Provide a threat classification based on the THREAT_SCORE
+2. Extract the existing RISK_SCORE from the summary
+3. Provide a threat classification based on the content and risk level
+4. Output the RISK_SCORE exactly as provided
 
 CLASSIFICATION RULES:
-- THREAT_SCORE 80-100: Assault (weapons/violence)
-- THREAT_SCORE 60-79: Abuse (aggressive behavior)
-- THREAT_SCORE 40-59: Arrest (police involvement)
-- THREAT_SCORE 20-39: Normal (minor incidents)
-- THREAT_SCORE 0-19: Normal (no threat)
+- RISK_SCORE 500+: Assault (weapons/violence)
+- RISK_SCORE 200-499: Abuse (aggressive behavior)
+- RISK_SCORE 100-199: Arrest (police involvement)
+- RISK_SCORE 50-99: Normal (minor incidents)
+- RISK_SCORE 0-49: Normal (no threat)
 
 SPECIAL CLASSIFICATIONS:
 - Police outside jail/station = Arrest
@@ -25,7 +25,7 @@ SPECIAL CLASSIFICATIONS:
 - Multiple weapons = Assault classification
 
 Respond ONLY in this exact format:
-THREAT_SCORE: [use the RISK_SCORE from the surveillance summary]
+RISK_SCORE: [use the exact RISK_SCORE from the surveillance summary]
 CLASSIFICATION: [Abuse|Assault|Arson|Arrest|Normal]"""
 
 

@@ -218,23 +218,23 @@ CLASSIFICATION: Normal
 NOTE: Threat classification failed - manual review required"""
                 print("🔄 Using fallback threat classification")
             
-            # Extract and display threat score for logging
-            threat_score = "Unknown"
+            # Extract and display risk score for logging
+            risk_score = "Unknown"
             threat_class = "Unknown"
             
             for line in threat_classification.split('\n'):
-                if line.startswith('THREAT_SCORE:'):
-                    threat_score = line.split(':', 1)[1].strip()
+                if line.startswith('RISK_SCORE:'):
+                    risk_score = line.split(':', 1)[1].strip()
                 elif line.startswith('CLASSIFICATION:'):
                     threat_class = line.split(':', 1)[1].strip()
             
             # Combine results with better formatting
-            final_result = f"""=== VIDEO SURVEILLANCE ANALYSIS ===\n\n{video_analysis_result}\n\n=== THREAT CLASSIFICATION ===\n\nTHREAT_SCORE: {threat_score}\nCLASSIFICATION: {threat_class}"""
+            final_result = f"""=== VIDEO SURVEILLANCE ANALYSIS ===\n\n{video_analysis_result}\n\n=== THREAT CLASSIFICATION ===\n\nRISK_SCORE: {risk_score}\nCLASSIFICATION: {threat_class}"""
             
             results[video_file.name] = final_result
             
             print(f"✅ Completed: {video_file.name}")
-            print(f"📊 Threat Score: {threat_score}")
+            print(f"📊 Risk Score: {risk_score}")
             print(f"🏷️ Classification: {threat_class}")
             
         except Exception as e:
